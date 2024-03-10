@@ -11,9 +11,12 @@ if __name__=='__main__':
 
 	template = Image.open(sys.argv[1])
 	full_name = [i.strip().upper() for i in sys.argv[3].split(' ')]
+	ln = max([len(i) for i in full_name])
 	
 	drawer = ImageDraw.Draw(template)
 	orientation = Config.TEXT_ORIENTATION
+	orientation[0] -= Config.LETTER_SIZE * ln
+
 	for word in full_name:
 		drawer.text(orientation, word, font=font_type, fill=Config.TEXT_COLOR_NORMAL, stroke_width=Config.FONT_WIDTH_NORMAL)
 		orientation[1] += Config.TEXT_SPACING
